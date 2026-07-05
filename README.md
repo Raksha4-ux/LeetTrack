@@ -21,7 +21,7 @@ response. When `status_msg === "Accepted"`, it fires a `CustomEvent` that
 `content.js` picks up, pulls the problem title/difficulty off the DOM, and
 sends it to the background worker, which does the actual dedupe + write.
 
-## Known fragility (being straight with you)
+## Known fragility 
 
 - This is not a documented/public API. LeetCode can change the endpoint
   path, response shape, or DOM structure for title/difficulty at any time
