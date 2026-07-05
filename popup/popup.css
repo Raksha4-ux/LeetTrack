@@ -1,0 +1,434 @@
+/*
+  Design tokens
+  -------------
+  Palette: near-black surfaces, not the generic warm-cream/serif AI look
+  nor the near-black+single-neon-accent look. Instead: cool dark slate
+  with THREE meaningful accents that map to something real - LeetCode's
+  own difficulty colors - plus one brand teal used sparingly for the
+  extension's own identity (streak, active tab, primary actions).
+
+  --bg            #0B0E14   app background
+  --surface       #12161F   cards/panels
+  --surface-alt   #1A1F2B   hovered/inset surfaces
+  --border        #232936
+  --text          #E6E8EB
+  --muted         #7D8590
+  --accent        #2DD4BF   brand teal (streak, active states, links)
+  --easy           #43C68A
+  --medium         #F2B84B
+  --hard           #F2545B
+
+  Type: system UI stack for prose (no network dependency in a popup),
+  monospace stack for all numbers/data - this is a tool for people who
+  live in an editor, so digits get a mono treatment throughout.
+*/
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0b0e14;
+  --surface: #12161f;
+  --surface-alt: #1a1f2b;
+  --border: #232936;
+  --text: #e6e8eb;
+  --muted: #7d8590;
+  --accent: #2dd4bf;
+  --accent-dim: #1c8f81;
+  --easy: #43c68a;
+  --medium: #f2b84b;
+  --hard: #f2545b;
+
+  --font-ui: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono",
+    Menlo, monospace;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: 13px;
+}
+
+.app {
+  width: 380px;
+  height: 560px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Header ---------- */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.brand-mark {
+  font-family: var(--font-mono);
+  color: var(--accent);
+}
+
+.streak-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.streak-flame {
+  color: var(--accent);
+  font-size: 10px;
+}
+
+.streak-label {
+  color: var(--muted);
+  font-family: var(--font-ui);
+}
+
+/* ---------- Tabs ---------- */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  padding: 0 8px;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  padding: 9px 10px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.tab-btn:hover {
+  color: var(--text);
+}
+
+.tab-btn.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* ---------- Panels ---------- */
+.tab-panels {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px;
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+/* ---------- Shared building blocks ---------- */
+.section-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.stat-cell {
+  background: var(--surface-alt);
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+
+.stat-cell .num {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  font-weight: 600;
+  display: block;
+}
+
+.stat-cell .label {
+  font-size: 10.5px;
+  color: var(--muted);
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+/* difficulty tags */
+.tag {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  display: inline-block;
+}
+.tag.Easy {
+  color: var(--easy);
+  background: rgba(67, 198, 138, 0.12);
+}
+.tag.Medium {
+  color: var(--medium);
+  background: rgba(242, 184, 75, 0.12);
+}
+.tag.Hard {
+  color: var(--hard);
+  background: rgba(242, 84, 91, 0.12);
+}
+.tag.Unknown {
+  color: var(--muted);
+  background: rgba(125, 133, 144, 0.12);
+}
+
+.pill-toggle {
+  display: flex;
+  gap: 4px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 3px;
+  width: fit-content;
+  margin-bottom: 10px;
+}
+
+.pill-toggle button {
+  border: none;
+  background: none;
+  color: var(--muted);
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.pill-toggle button.active {
+  background: var(--accent);
+  color: #06110f;
+  font-weight: 600;
+}
+
+/* ---------- Calendar heatmap ---------- */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(13, 1fr);
+  gap: 3px;
+}
+
+.cal-cell {
+  aspect-ratio: 1;
+  border-radius: 2px;
+  background: var(--surface-alt);
+  position: relative;
+}
+
+.cal-cell[data-level="1"] {
+  background: rgba(45, 212, 191, 0.28);
+}
+.cal-cell[data-level="2"] {
+  background: rgba(45, 212, 191, 0.5);
+}
+.cal-cell[data-level="3"] {
+  background: rgba(45, 212, 191, 0.75);
+}
+.cal-cell[data-level="4"] {
+  background: var(--accent);
+}
+
+.cal-cell:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #000;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 3px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.calendar-legend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+/* ---------- History table ---------- */
+.history-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="date"],
+select {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 12px;
+  font-family: var(--font-ui);
+}
+
+.filter-row {
+  display: flex;
+  gap: 6px;
+}
+
+.filter-row select,
+.filter-row input {
+  flex: 1;
+}
+
+table.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11.5px;
+}
+
+table.history-table th {
+  text-align: left;
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 6px 4px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+}
+
+table.history-table td {
+  padding: 6px 4px;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-mono);
+}
+
+table.history-table td.title-cell {
+  font-family: var(--font-ui);
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.empty-state {
+  color: var(--muted);
+  text-align: center;
+  padding: 30px 10px;
+  font-size: 12px;
+}
+
+/* ---------- Buttons ---------- */
+button.btn {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 7px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: var(--font-ui);
+}
+
+button.btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+button.btn.primary {
+  background: var(--accent);
+  color: #06110f;
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+button.btn.danger:hover {
+  border-color: var(--hard);
+  color: var(--hard);
+}
+
+.btn-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.settings-row:last-child {
+  border-bottom: none;
+}
+
+.settings-row .desc {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}

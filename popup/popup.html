@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>LeetTrack</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-mark">&lt;/&gt;</span>
+        <span class="brand-name">LeetTrack</span>
+      </div>
+      <div class="streak-pill" id="streak-pill">
+        <span class="streak-flame">▲</span>
+        <span id="streak-value">0</span>
+        <span class="streak-label">day streak</span>
+      </div>
+    </header>
+
+    <nav class="tabs" id="tabs">
+      <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+      <button class="tab-btn" data-tab="calendar">Calendar</button>
+      <button class="tab-btn" data-tab="stats">Stats</button>
+      <button class="tab-btn" data-tab="history">History</button>
+      <button class="tab-btn" data-tab="settings">Settings</button>
+    </nav>
+
+    <main class="tab-panels">
+      <section class="tab-panel active" id="panel-dashboard"></section>
+      <section class="tab-panel" id="panel-calendar"></section>
+      <section class="tab-panel" id="panel-stats"></section>
+      <section class="tab-panel" id="panel-history"></section>
+      <section class="tab-panel" id="panel-settings"></section>
+    </main>
+  </div>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
