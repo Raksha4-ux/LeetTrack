@@ -248,18 +248,47 @@ body {
   font-weight: 600;
 }
 
-/* ---------- Calendar heatmap ---------- */
-.calendar-grid {
+/* ---------- Calendar heatmap (GitHub/LeetCode-style: weeks as columns) ---------- */
+.calendar-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.calendar-header-row select {
+  padding: 3px 6px;
+  font-size: 11px;
+}
+
+.cal-year-scroll {
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.cal-month-labels {
+  position: relative;
+  height: 14px;
+  font-size: 9.5px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+}
+
+.cal-year-grid {
   display: grid;
-  grid-template-columns: repeat(13, 1fr);
   gap: 3px;
 }
 
 .cal-cell {
-  aspect-ratio: 1;
+  width: 10px;
+  height: 10px;
   border-radius: 2px;
   background: var(--surface-alt);
   position: relative;
+}
+
+.cal-cell.empty {
+  background: transparent;
 }
 
 .cal-cell[data-level="1"] {
@@ -278,7 +307,7 @@ body {
 .cal-cell:hover::after {
   content: attr(data-tooltip);
   position: absolute;
-  bottom: 120%;
+  bottom: 130%;
   left: 50%;
   transform: translateX(-50%);
   background: #000;
